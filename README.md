@@ -7,6 +7,7 @@
 - Python Package: see *requirements.txt*
 
 # Usage
+
 ## Environment Building
 
 ``` sh
@@ -21,6 +22,13 @@ python3 -m pip install --upgrade pip
 
 # Install the requirement package
 pip install -r requirements.txt
+```
+## Download Dataset
+We are using [FFHQ](https://github.com/NVlabs/ffhq-dataset) here:
+```sh
+cd dataset
+git clone git@github.com:NVlabs/ffhq-dataset.git
+python3 ffhq-dataset/download_ffhq.py -i
 ```
 
 ## Reference
