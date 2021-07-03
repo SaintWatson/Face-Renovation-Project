@@ -1,10 +1,16 @@
 # Face-Renovation-Project
 
+# Environment
+- Arch Linux
+- Python: 3.9.5
+- CUDA: 11.3
+- Python Package: see *requirements.txt*
+
 # Usage
 ## Environment Building
 
 ``` sh
-# Create a virtula environment
+# Create a virtual environment
 python3 -m venv env
 
 # Activate your environment
