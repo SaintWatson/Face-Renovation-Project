@@ -1,36 +1,14 @@
 # Face-Renovation-Project
 
 # Environment
-- Arch Linux
+- OS: Arch Linux
 - Python: 3.9.5
 - CUDA: 11.3
 - Python Package: see *requirements.txt*
 
-# Usage
+# Develop Journal
+See more detail information on [here](https://g0v.hackmd.io/Dt_XN8YXTk2icIrNOdfdcQ) !
 
-## Environment Building
-
-``` sh
-# Create a virtual environment
-python3 -m venv env
-
-# Activate your environment
-source env/bin/activate
-
-# If your pip is overtime, upgrade it.
-python3 -m pip install --upgrade pip
-
-# Install the requirement package
-pip install -r requirements.txt
-```
-## Download Dataset
-We are using [FFHQ](https://github.com/NVlabs/ffhq-dataset) here:
-```sh
-cd dataset
-git clone git@github.com:NVlabs/ffhq-dataset.git
-python3 ffhq-dataset/download_ffhq.py -i
-```
-
-## Reference
+# Reference
 - [HiFaceGAN-Paper](https://arxiv.org/abs/2005.05005)
 - [HiFaceGAN-GitHub](https://github.com/Lotayou/Face-Renovation)

@@ -2,3 +2,6 @@ env
 dataset/ffhq-dataset
 dataset/images1024x1024
 dataset/ffhq-dataset-v2.json
+dataset/train_set
+dataset/valid_set
+*__pycache__
