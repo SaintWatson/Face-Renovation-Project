@@ -41,7 +41,25 @@ def sample(train_size, valid_size, init=True):
         for i in tqdm(index, desc=dir[-9:]):
             file_path = index2path(i)
             copyfile(file_path, f'{dir}/{i}.png')
+
+def renamer():
+    train_set_path = f'{getPath()}/train_set'
+    valid_set_path = f'{getPath()}/valid_set'
+
+    for  i,file in enumerate(os.listdir(train_set_path)):
+
+        old_filename = f'{getPath()}/train_set/{file}'
+        new_filename = f'{getPath()}/train_set/{str(i).zfill(5)}.png'
         
+        os.rename(old_filename, new_filename)
+
+    for  i,file in enumerate(os.listdir(valid_set_path)):
+
+        old_filename = f'{getPath()}/valid_set/{file}'
+        new_filename = f'{getPath()}/valid_set/{str(i).zfill(5)}.png'
+        
+        os.rename(old_filename, new_filename)
+    
 if __name__ == '__main__':
 
     try:
@@ -58,6 +76,7 @@ if __name__ == '__main__':
             raise ValueError("Error: Dataset directory doesn't exist.")
         
         sample(train_size, valid_size)
+        renamer()
 
 
     except ValueError as e:
