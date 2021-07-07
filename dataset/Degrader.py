@@ -80,7 +80,7 @@ def degrade(img):
 
     return img
 
-def savePair(ori_imgs, dgd_imgs):
+def savePairImage(ori_imgs, dgd_imgs):
 
     if len(ori_imgs) != len(dgd_imgs):
         return
@@ -115,11 +115,11 @@ if __name__ == '__main__':
             if os.path.isdir(getDatasetPath(dir)):
                 rmtree(getDatasetPath(dir))
                 os.mkdir(getDatasetPath(dir))
-                
-
     except ValueError as e:
         print(e)
         exit()
+
+
 
     srcFiles = []
     for path_id in [0,1]:
