@@ -3,7 +3,6 @@ from torch.utils.data import Dataset
 from matplotlib import use
 import matplotlib.pyplot as plt
 from torchvision.transforms import *
-from utils.degrade import Hello
 
 
 
@@ -18,16 +17,24 @@ class FaceDataset(Dataset):
             transforms.ToPILImage(),
             transforms.RandomCrop(768),
             transforms.RandomHorizontalFlip(),
+            transforms.RandomAffine(15),
             transforms.Resize(512),
             transforms.ToTensor(),
             transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225] )
         ])
 
     def __getitem__(self, index):
+
         filename = f'{str(index).zfill(5)}.png'
-        img = torchvision.io.read_image(f'{self.path}/{filename}')
-        img = self.transform(img)
-        return img
+        ori_img = torchvision.io.read_image(f'{self.path}/{filename}')
+        
+        from copy import deepcopy
+        dgd_img = deepcopy(ori_img)
+
+        ori_img, dgd_img = self.transform(ori_img, dgd_img)
+
+
+        return ori_img, dgd_img
 
     def __len__(self):
         return len(os.listdir(self.path))
@@ -35,7 +42,7 @@ class FaceDataset(Dataset):
     def imshow(self, row=4):
 
         use('WebAgg')
-        images = [(self[i]+1)/2 for i in range(row**2)]
+        images = [(self[i][1]+1)/2 for i in range(row**2)]
         grid_img = torchvision.utils.make_grid(images, nrow=row)
         plt.figure(figsize=(10,10))
         plt.imshow(grid_img.permute(1, 2, 0))
@@ -61,5 +68,5 @@ class FaceDataset(Dataset):
 if __name__ == '__main__':
 
     dataset = FaceDataset('train')
-    # dataset.imshow(5)
+    dataset.imshow(5)
         

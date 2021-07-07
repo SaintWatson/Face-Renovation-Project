@@ -23,11 +23,9 @@ def sample(train_size, valid_size, init=True):
                 rmtree(dir)
         os.mkdir(train_set_path)
         os.mkdir(train_set_path+'/ori')
-        os.mkdir(train_set_path+'/dgd')
 
         os.mkdir(valid_set_path)
         os.mkdir(valid_set_path+'/ori')
-        os.mkdir(valid_set_path+'/dgd')
 
     def index2path(index):
         filename = str(index).zfill(5) + '.png'
