@@ -1,16 +1,16 @@
-from FaceDataset import FaceDataset
+from dataset.FaceDataset import FaceDataset
 from torch.utils.data import DataLoader
 
 
-def getFaceLoader(type='train'):
+def getFaceLoader(opt, type='train'):
 
     dataset = FaceDataset(type)
 
     dataloader = DataLoader(
         dataset = dataset,
-        batch_size = 12,
+        batch_size = opt.batch_size,
         shuffle = (type=='train'),
-        num_workers = 2
+        num_workers = opt.num_workers
     )
 
     return dataloader
