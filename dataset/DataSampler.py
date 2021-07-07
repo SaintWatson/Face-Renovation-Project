@@ -22,7 +22,12 @@ def sample(train_size, valid_size, init=True):
             if os.path.isdir(dir):
                 rmtree(dir)
         os.mkdir(train_set_path)
+        os.mkdir(train_set_path+'/ori')
+        os.mkdir(train_set_path+'/dgd')
+
         os.mkdir(valid_set_path)
+        os.mkdir(valid_set_path+'/ori')
+        os.mkdir(valid_set_path+'/dgd')
 
     def index2path(index):
         filename = str(index).zfill(5) + '.png'
@@ -38,28 +43,10 @@ def sample(train_size, valid_size, init=True):
 
 
     for (dir, index) in [(train_set_path, train_index), (valid_set_path, valid_index)]:
-        for i in tqdm(index, desc=dir[-9:]):
-            file_path = index2path(i)
-            copyfile(file_path, f'{dir}/{i}.png')
+        for i, id in tqdm(enumerate(index), desc=dir[-9:]):
+            src_path = index2path(id)
+            copyfile(src_path, f'{dir}/ori/{str(i).zfill(5)}.png')
 
-def renamer():
-    train_set_path = f'{getPath()}/train_set'
-    valid_set_path = f'{getPath()}/valid_set'
-
-    for  i,file in enumerate(os.listdir(train_set_path)):
-
-        old_filename = f'{getPath()}/train_set/{file}'
-        new_filename = f'{getPath()}/train_set/{str(i).zfill(5)}.png'
-        
-        os.rename(old_filename, new_filename)
-
-    for  i,file in enumerate(os.listdir(valid_set_path)):
-
-        old_filename = f'{getPath()}/valid_set/{file}'
-        new_filename = f'{getPath()}/valid_set/{str(i).zfill(5)}.png'
-        
-        os.rename(old_filename, new_filename)
-    
 if __name__ == '__main__':
 
     try:
@@ -76,7 +63,6 @@ if __name__ == '__main__':
             raise ValueError("Error: Dataset directory doesn't exist.")
         
         sample(train_size, valid_size)
-        renamer()
 
 
     except ValueError as e:
